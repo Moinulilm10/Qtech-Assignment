@@ -1,0 +1,84 @@
+import { Menu, ShoppingCart, X } from "lucide-react";
+import { useState } from "react";
+
+const Navbar = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  return (
+    <>
+      <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f3e7e8] px-4 md:px-10 py-3">
+        <div className="flex items-center gap-4 text-[#1b0e0e]">
+          <div className="w-4 h-4">
+            <svg
+              viewBox="0 0 48 48"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M42.4379 44C42.4379 44 36.0744 33.9038 41.1692 24C46.8624 12.9336 42.2078 4 42.2078 4L7.01134 4C7.01134 4 11.6577 12.932 5.96912 23.9969C0.876273 33.9029 7.27094 44 7.27094 44L42.4379 44Z"
+                fill="currentColor"
+              />
+            </svg>
+          </div>
+          <h2 className="text-[#1b0e0e] text-lg font-bold leading-tight tracking-[-0.015em]">
+            ShopSmart
+          </h2>
+        </div>
+
+        {/* Desktop Navigation */}
+        <div className="justify-end flex-1 hidden gap-8 md:flex">
+          <div className="flex items-center gap-9">
+            <a
+              className="text-[#1b0e0e] text-sm font-medium leading-normal"
+              href="#"
+            >
+              Home
+            </a>
+          </div>
+          <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#f3e7e8] text-[#1b0e0e] text-sm font-bold leading-normal tracking-[0.015em]">
+            <span className="truncate">Cart</span>
+          </button>
+        </div>
+
+        {/* Mobile Menu Button */}
+        <div className="flex items-center gap-4 md:hidden">
+          <button className="flex items-center justify-center w-10 h-10 bg-[#f3e7e8] rounded-lg">
+            <ShoppingCart className="w-5 h-5 text-[#1b0e0e]" />
+          </button>
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="text-[#1b0e0e] hover:text-gray-700"
+          >
+            {isMobileMenuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
+          </button>
+        </div>
+      </header>
+
+      {/* Mobile Dropdown Menu */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden bg-white border-b border-[#f3e7e8]">
+          <div className="px-4 py-3 space-y-2">
+            <a
+              href="#"
+              className="block text-[#1b0e0e] text-sm font-medium py-2"
+            >
+              Home
+            </a>
+            <a
+              href="#"
+              className="block text-[#1b0e0e] text-sm font-medium py-2"
+            >
+              Cart
+            </a>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default Navbar;
