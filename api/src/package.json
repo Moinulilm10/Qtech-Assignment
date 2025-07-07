@@ -1,0 +1,35 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build": "echo \"Building the project...\"",
+    "lint": "echo \"Linting the project...\"",
+    "format": "echo \"Formatting the project...\"",
+    "prestart": "echo \"Preparing to start the server...\"",
+    "poststart": "echo \"Server started successfully!\"",
+    "predev": "echo \"Preparing to run in development mode...\"",
+    "postdev": "echo \"Development server is running!\"",
+    "prebuild": "echo \"Preparing to build the project...\"",
+    "postbuild": "echo \"Project built successfully!\"",
+    "pretest": "echo \"Preparing to run tests...\"",
+    "posttest": "echo \"Tests completed!\"",
+    "prelint": "echo \"Preparing to lint the project...\"",
+    "postlint": "echo \"Linting completed!\"",
+    "preformat": "echo \"Preparing to format the project...\"",
+    "postformat": "echo \"Formatting completed!\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
