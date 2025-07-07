@@ -1,12 +1,17 @@
-import { Menu, ShoppingCart, X } from "lucide-react";
 import { useState } from "react";
+import CartSidebar from "./CartSidebar";
 
 const Navbar = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const handleCartClick = () => {
+    setIsCartOpen(true);
+  };
 
   return (
     <>
       <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f3e7e8] px-4 md:px-10 py-3">
+        {/* Logo */}
         <div className="flex items-center gap-4 text-[#1b0e0e]">
           <div className="w-4 h-4">
             <svg
@@ -25,58 +30,25 @@ const Navbar = () => {
           </h2>
         </div>
 
-        {/* Desktop Navigation */}
-        <div className="justify-end flex-1 hidden gap-8 md:flex">
-          <div className="flex items-center gap-9">
-            <a
-              className="text-[#1b0e0e] text-sm font-medium leading-normal"
-              href="#"
-            >
-              Home
-            </a>
-          </div>
-          <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#f3e7e8] text-[#1b0e0e] text-sm font-bold leading-normal tracking-[0.015em]">
-            <span className="truncate">Cart</span>
-          </button>
-        </div>
-
-        {/* Mobile Menu Button */}
-        <div className="flex items-center gap-4 md:hidden">
-          <button className="flex items-center justify-center w-10 h-10 bg-[#f3e7e8] rounded-lg">
-            <ShoppingCart className="w-5 h-5 text-[#1b0e0e]" />
-          </button>
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="text-[#1b0e0e] hover:text-gray-700"
+        {/* Navigation Links (Desktop + Mobile) */}
+        <div className="flex items-center gap-6">
+          <a
+            className="text-[#1b0e0e] text-sm font-medium leading-normal hover:underline"
+            href="#"
           >
-            {isMobileMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
+            Home
+          </a>
+          <button
+            onClick={handleCartClick}
+            className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#f3e7e8] text-[#1b0e0e] text-sm font-bold leading-normal tracking-[0.015em] hover:bg-[#e8d5d6] transition-colors"
+          >
+            <span className="truncate">Cart</span>
           </button>
         </div>
       </header>
 
-      {/* Mobile Dropdown Menu */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden bg-white border-b border-[#f3e7e8]">
-          <div className="px-4 py-3 space-y-2">
-            <a
-              href="#"
-              className="block text-[#1b0e0e] text-sm font-medium py-2"
-            >
-              Home
-            </a>
-            <a
-              href="#"
-              className="block text-[#1b0e0e] text-sm font-medium py-2"
-            >
-              Cart
-            </a>
-          </div>
-        </div>
-      )}
+      {/* Cart Sidebar */}
+      <CartSidebar isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </>
   );
 };
