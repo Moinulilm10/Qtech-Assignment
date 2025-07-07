@@ -2,6 +2,7 @@ import FeaturedProducts from "../components/FeaturedProducts";
 import Footer from "../components/Footer";
 import HeroBanner from "../components/HeroBanner";
 import Navbar from "../components/Navbar";
+import NewArrivalProducts from "../components/NewArrivalProducts";
 
 const HomePage = () => {
   return (
@@ -20,6 +21,10 @@ const HomePage = () => {
               Featured Products
             </h2>
             <FeaturedProducts />
+            <h2 className="text-[#1b0e0e] text-lg sm:text-xl md:text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5 mt-5">
+              New Arrival Products
+            </h2>
+            <NewArrivalProducts />
           </div>
         </div>
         <Footer />
