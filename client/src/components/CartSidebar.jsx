@@ -1,7 +1,9 @@
 import { Minus, Plus, X } from "lucide-react";
 import { useState } from "react";
+import CheckoutForm from "./CheckoutForm";
 
 const CartSidebar = ({ isOpen, onClose }) => {
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [cartItems, setCartItems] = useState([
     {
       id: 1,
@@ -161,12 +163,21 @@ const CartSidebar = ({ isOpen, onClose }) => {
               </div>
             </div>
 
-            <button className="w-full px-6 py-3 text-sm font-bold text-white transition-colors bg-red-500 rounded-lg hover:bg-red-600 md:py-4 md:text-base">
+            <button
+              onClick={() => setIsCheckoutOpen(true)}
+              className="w-full px-6 py-3 text-sm font-bold text-white transition-colors bg-red-500 rounded-lg hover:bg-red-600 md:py-4 md:text-base"
+            >
               Checkout
             </button>
           </div>
         </div>
       </div>
+
+      {/* Checkout Form */}
+      <CheckoutForm
+        isOpen={isCheckoutOpen}
+        onClose={() => setIsCheckoutOpen(false)}
+      />
     </>
   );
 };
