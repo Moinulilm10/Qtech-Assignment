@@ -1,4 +1,5 @@
 import FeaturedProducts from "../components/FeaturedProducts";
+import Footer from "../components/Footer";
 import HeroBanner from "../components/HeroBanner";
 import Navbar from "../components/Navbar";
 
@@ -21,6 +22,7 @@ const HomePage = () => {
             <FeaturedProducts />
           </div>
         </div>
+        <Footer />
       </div>
     </div>
   );
