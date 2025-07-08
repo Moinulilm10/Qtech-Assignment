@@ -12,7 +12,7 @@ const HomePage = () => {
     >
       <div className="flex flex-col h-full grow">
         <Navbar />
-        <div className="flex justify-center flex-1 px-4 py-5 sm:px-8 md:px-16 lg:px-40">
+        <div className="flex justify-center flex-1 px-4 py-5 mb-32 sm:px-8 md:px-16 lg:px-40">
           <div className="flex flex-col max-w-[1560px] flex-1">
             {/* Hero Section */}
             <HeroBanner />

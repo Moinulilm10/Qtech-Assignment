@@ -1,3 +1,6 @@
+import Slider from "react-slick";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 import productImage from "../assets/img/productImage.svg";
 
 const FeaturedProducts = () => {
@@ -39,29 +42,103 @@ const FeaturedProducts = () => {
     // Add your cart logic here
   };
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    pauseOnHover: true,
+    responsive: [
+      {
+        breakpoint: 1536, // 2xl
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 1280, // xl
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 1024, // lg
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 768, // md
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 640, // sm
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          dots: true,
+        },
+      },
+    ],
+  };
+
   return (
     <div className="px-4">
-      {/* Mobile: Horizontal scroll */}
-      <div className="flex gap-3 pb-4 overflow-x-auto sm:hidden">
+      <style jsx>{`
+        .slick-dots {
+          bottom: -50px;
+        }
+        .slick-dots li button:before {
+          color: #994d51;
+          font-size: 12px;
+        }
+        .slick-dots li.slick-active button:before {
+          color: #994d51;
+        }
+        .slick-prev:before,
+        .slick-next:before {
+          color: #994d51;
+          font-size: 20px;
+        }
+        .slick-prev {
+          left: -30px;
+          z-index: 1;
+        }
+        .slick-next {
+          right: -30px;
+          z-index: 1;
+        }
+      `}</style>
+
+      <Slider {...settings}>
         {products.map((product, index) => (
-          <div key={index} className="flex-shrink-0 w-[200px]">
-            <div className="flex flex-col gap-3 rounded-lg">
+          <div key={index} className="px-2">
+            <div className="flex flex-col gap-3 rounded-lg w-[200px] mx-auto">
               <div
                 className="w-full bg-center bg-no-repeat bg-cover rounded-lg aspect-square"
                 style={{ backgroundImage: `url(${product.image})` }}
               />
               <div className="flex flex-col gap-2">
                 <div>
-                  <p className="text-[#1b0e0e] text-sm font-medium leading-normal">
+                  <p className="text-[#1b0e0e] text-sm md:text-base font-medium leading-normal">
                     {product.name}
                   </p>
-                  <p className="text-[#994d51] text-xs font-normal leading-normal">
+                  <p className="text-[#994d51] text-xs md:text-sm font-normal leading-normal">
                     {product.price}
                   </p>
                 </div>
                 <button
                   onClick={() => handleAddToCart(product)}
-                  className="w-full bg-[#994d51] hover:bg-[#f3e7e8] hover:text-[#994d51] text-white text-xs font-medium py-2 px-3 rounded-lg transition-colors duration-200"
+                  className="w-full bg-[#994d51] hover:bg-[#f3e7e8] hover:text-[#994d51] text-white text-xs md:text-sm font-medium py-2 px-3 rounded-lg transition-colors duration-200"
                 >
                   Add to Cart
                 </button>
@@ -69,38 +146,7 @@ const FeaturedProducts = () => {
             </div>
           </div>
         ))}
-      </div>
-
-      {/* Tablet and Desktop: Grid */}
-      <div className="hidden grid-cols-2 gap-4 sm:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 md:gap-6">
-        {products.map((product, index) => (
-          <div
-            key={index}
-            className="flex flex-col gap-3 rounded-lg w-[200px] mx-auto"
-          >
-            <div
-              className="w-full bg-center bg-no-repeat bg-cover rounded-lg aspect-square"
-              style={{ backgroundImage: `url(${product.image})` }}
-            />
-            <div className="flex flex-col gap-2">
-              <div>
-                <p className="text-[#1b0e0e] text-sm md:text-base font-medium leading-normal">
-                  {product.name}
-                </p>
-                <p className="text-[#994d51] text-xs md:text-sm font-normal leading-normal">
-                  {product.price}
-                </p>
-              </div>
-              <button
-                onClick={() => handleAddToCart(product)}
-                className="w-full bg-[#994d51] hover:bg-[#f3e7e8] hover:text-[#994d51] text-white  text-xs md:text-sm font-medium py-2 px-3 rounded-lg transition-colors duration-200"
-              >
-                Add to Cart
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
+      </Slider>
     </div>
   );
 };
