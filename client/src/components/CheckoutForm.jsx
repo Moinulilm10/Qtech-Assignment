@@ -25,7 +25,7 @@ const CheckoutForm = ({ isOpen, onClose }) => {
         text: "Order placed successfully!",
         icon: "success",
         confirmButtonText: "OK",
-        confirmButtonColor: "#ef4444",
+        confirmButtonColor: "#994d51",
       }).then(() => {
         onClose();
         setFormData({ name: "", email: "", address: "" });
@@ -76,7 +76,7 @@ const CheckoutForm = ({ isOpen, onClose }) => {
                   value={formData.name}
                   onChange={handleInputChange}
                   placeholder="Enter your name"
-                  className="w-full px-4 py-3 placeholder-gray-400 transition-colors border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                  className="w-full px-4 py-3 placeholder-gray-400 transition-colors border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#994d51] focus:border-transparent"
                   required
                 />
               </div>
@@ -92,7 +92,7 @@ const CheckoutForm = ({ isOpen, onClose }) => {
                   value={formData.email}
                   onChange={handleInputChange}
                   placeholder="Enter your email"
-                  className="w-full px-4 py-3 placeholder-gray-400 transition-colors border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                  className="w-full px-4 py-3 placeholder-gray-400 transition-colors border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#994d51] focus:border-transparent"
                   required
                 />
               </div>
@@ -108,7 +108,7 @@ const CheckoutForm = ({ isOpen, onClose }) => {
                   onChange={handleInputChange}
                   placeholder="Enter your address"
                   rows="4"
-                  className="w-full px-4 py-3 placeholder-gray-400 transition-colors border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                  className="w-full px-4 py-3 placeholder-gray-400 transition-colors border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-[#994d51] focus:border-transparent"
                   required
                 />
               </div>
@@ -116,7 +116,7 @@ const CheckoutForm = ({ isOpen, onClose }) => {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full px-6 py-3 mt-8 text-base font-bold text-white transition-colors bg-red-500 rounded-lg hover:bg-red-600"
+                className="w-full px-6 py-3 mt-8 text-base font-bold text-white transition-colors bg-[#994d51] rounded-lg hover:bg-[#994d51]"
               >
                 Place Order
               </button>

@@ -165,7 +165,7 @@ const CartSidebar = ({ isOpen, onClose }) => {
 
             <button
               onClick={() => setIsCheckoutOpen(true)}
-              className="w-full px-6 py-3 text-sm font-bold text-white transition-colors bg-red-500 rounded-lg hover:bg-red-600 md:py-4 md:text-base"
+              className="w-full px-6 py-3 text-sm font-bold text-white transition-colors bg-[#994d51] rounded-lg hover:bg-[#994d51]md:py-4 md:text-base"
             >
               Checkout
             </button>
