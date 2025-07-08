@@ -13,7 +13,7 @@ const HomePage = () => {
       <div className="flex flex-col h-full grow">
         <Navbar />
         <div className="flex justify-center flex-1 px-4 py-5 mb-32 sm:px-8 md:px-16 lg:px-40">
-          <div className="flex flex-col max-w-[1560px] flex-1">
+          <div className="flex flex-col max-w-[1379px] flex-1">
             {/* Hero Section */}
             <HeroBanner />
             {/* Featured Products */}
@@ -21,7 +21,7 @@ const HomePage = () => {
               Featured Products
             </h2>
             <FeaturedProducts />
-            <h2 className="text-[#1b0e0e] text-lg sm:text-xl md:text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5 mt-5">
+            <h2 className="text-[#1b0e0e] text-lg sm:text-xl md:text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5 mt-20">
               New Arrival Products
             </h2>
             <NewArrivalProducts />

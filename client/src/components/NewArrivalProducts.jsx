@@ -39,7 +39,6 @@ const NewArrivalProducts = () => {
 
   const handleAddToCart = (product) => {
     console.log(`Added ${product.name} to cart`);
-    // Add your cart logic here
   };
 
   const settings = {
@@ -51,37 +50,38 @@ const NewArrivalProducts = () => {
     autoplay: true,
     autoplaySpeed: 3000,
     pauseOnHover: true,
+    arrows: false,
     responsive: [
       {
-        breakpoint: 1536, // 2xl
+        breakpoint: 1536,
         settings: {
           slidesToShow: 5,
           slidesToScroll: 1,
         },
       },
       {
-        breakpoint: 1280, // xl
+        breakpoint: 1280,
         settings: {
           slidesToShow: 4,
           slidesToScroll: 1,
         },
       },
       {
-        breakpoint: 1024, // lg
+        breakpoint: 1024,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
       {
-        breakpoint: 768, // md
+        breakpoint: 768,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
         },
       },
       {
-        breakpoint: 640, // sm
+        breakpoint: 640,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
@@ -103,19 +103,6 @@ const NewArrivalProducts = () => {
         }
         .slick-dots li.slick-active button:before {
           color: #994d51;
-        }
-        .slick-prev:before,
-        .slick-next:before {
-          color: #994d51;
-          font-size: 20px;
-        }
-        .slick-prev {
-          left: -30px;
-          z-index: 1;
-        }
-        .slick-next {
-          right: -30px;
-          z-index: 1;
         }
       `}</style>
 
