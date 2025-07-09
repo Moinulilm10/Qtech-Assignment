@@ -1,4 +1,4 @@
-import { Minus, Plus, Trash2, X } from "lucide-react"; // ✅ Added Trash2 icon
+import { Minus, Plus, Trash2, X } from "lucide-react";
 import { useState } from "react";
 import CheckoutForm from "./CheckoutForm";
 
