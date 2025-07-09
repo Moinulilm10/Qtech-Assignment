@@ -25,7 +25,7 @@ const CheckoutForm = ({ isOpen, onClose }) => {
         title: "Success!",
         text: "Order placed successfully!",
         confirmButtonText: "OK",
-        confirmButtonColor: "#994d51",
+        // confirmButtonColor: "#994d51",
       }).then(() => {
         onClose();
         setFormData({ name: "", email: "", address: "" });
