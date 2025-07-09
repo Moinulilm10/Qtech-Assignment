@@ -21,9 +21,9 @@ const CheckoutForm = ({ isOpen, onClose }) => {
     e.preventDefault();
     if (formData.name && formData.email && formData.address) {
       Swal.fire({
+        icon: "success",
         title: "Success!",
         text: "Order placed successfully!",
-        icon: "success",
         confirmButtonText: "OK",
         confirmButtonColor: "#994d51",
       }).then(() => {
