@@ -1,9 +1,10 @@
-import { Minus, Plus, X } from "lucide-react";
+import { Minus, Plus, Trash2, X } from "lucide-react"; // ✅ Added Trash2 icon
 import { useState } from "react";
 import CheckoutForm from "./CheckoutForm";
 
 const CartSidebar = ({ isOpen, onClose }) => {
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+
   const [cartItems, setCartItems] = useState([
     {
       id: 1,
@@ -51,6 +52,16 @@ const CartSidebar = ({ isOpen, onClose }) => {
     );
   };
 
+  // ✅ Remove single item
+  const removeItem = (id) => {
+    setCartItems((prev) => prev.filter((item) => item.id !== id));
+  };
+
+  // ✅ Remove all items
+  const removeAllItems = () => {
+    setCartItems([]);
+  };
+
   const subtotal = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
@@ -93,7 +104,15 @@ const CartSidebar = ({ isOpen, onClose }) => {
           <div className="flex-1 p-4 overflow-y-auto md:p-6">
             <div className="space-y-6">
               {cartItems.map((item) => (
-                <div key={item.id} className="flex items-center gap-4">
+                <div key={item.id} className="relative flex items-center gap-4">
+                  {/* ❌ Remove Button */}
+                  <button
+                    onClick={() => removeItem(item.id)}
+                    className="p-2 text-gray-400 transition-colors bg-gray-100 rounded-full hover:text-red-600 hover:bg-gray-200"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+
                   {/* Product Image */}
                   <div className="flex items-center justify-center flex-shrink-0 w-16 h-16 bg-gray-100 rounded-lg md:w-20 md:h-20">
                     <div className="w-10 h-10 bg-gray-300 rounded md:w-12 md:h-12"></div>
@@ -131,6 +150,17 @@ const CartSidebar = ({ isOpen, onClose }) => {
                   </div>
                 </div>
               ))}
+
+              {/* 🗑️ Delete All Button */}
+              {cartItems.length > 0 && (
+                <button
+                  onClick={removeAllItems}
+                  className="flex items-center gap-2 px-4 py-2 mt-4 text-sm font-semibold text-red-600 transition-colors rounded hover:bg-red-50"
+                >
+                  <Trash2 className="w-4 h-4" />
+                  Delete All
+                </button>
+              )}
             </div>
           </div>
 
@@ -165,7 +195,7 @@ const CartSidebar = ({ isOpen, onClose }) => {
 
             <button
               onClick={() => setIsCheckoutOpen(true)}
-              className="w-full px-6 py-3 text-sm font-bold text-white transition-colors bg-[#994d51] rounded-lg hover:bg-[#994d51]md:py-4 md:text-base"
+              className="w-full px-6 py-3 text-sm font-bold text-white transition-colors bg-[#994d51] rounded-lg hover:bg-[#994d51] md:py-4 md:text-base"
             >
               Checkout
             </button>
