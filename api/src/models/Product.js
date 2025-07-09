@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 const productSchema = new mongoose.Schema({
   image: {
     type: String,
-    required: true,
   },
   title: {
     type: String,
@@ -16,6 +15,14 @@ const productSchema = new mongoose.Schema({
     min: 0,
   },
   isUpcoming: {
+    type: Boolean,
+    default: false,
+  },
+  isFavorite: {
+    type: Boolean,
+    default: false,
+  },
+  inCart: {
     type: Boolean,
     default: false,
   },

@@ -2,7 +2,9 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
+
 import { adminJs, adminRouter } from "./admin.js";
+import productsRoutes from "./routes/productsRoutes.js";
 
 dotenv.config();
 
@@ -16,6 +18,9 @@ mongoose
   .catch((err) => console.error("MongoDB connection error:", err));
 
 app.use(adminJs.options.rootPath, adminRouter);
+
+// Register routes
+app.use("/api/products", productsRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

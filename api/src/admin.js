@@ -11,7 +11,7 @@ AdminJS.registerAdapter({
 
 // Clone for multiple views
 const UpcomingProduct = mongoose.model("UpcomingProduct", productSchema);
-const FavouriteProduct = mongoose.model("FavouriteProduct", productSchema);
+const FavoriteProduct = mongoose.model("FavouriteProduct", productSchema);
 const CartProduct = mongoose.model("CartProduct", productSchema);
 
 const adminJs = new AdminJS({
@@ -31,13 +31,25 @@ const adminJs = new AdminJS({
         id: "upcoming-products",
         name: { plural: "Upcoming Products" },
         navigation: null,
+        actions: {
+          list: {
+            before: async (request) => {
+              request.query = request.query || {};
+              request.query.filters = {
+                ...request.query.filters,
+                isUpcoming: true,
+              };
+              return request;
+            },
+          },
+        },
       },
     },
     {
-      resource: FavouriteProduct,
+      resource: FavoriteProduct,
       options: {
-        id: "favourite-items",
-        name: { plural: "Favourite Items" },
+        id: "favorite-items",
+        name: { plural: "Favorite Items" },
         navigation: null,
         actions: {
           new: { isAccessible: false },
