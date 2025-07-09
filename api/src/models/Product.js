@@ -15,6 +15,10 @@ const productSchema = new mongoose.Schema({
     required: true,
     min: 0,
   },
+  isUpcoming: {
+    type: Boolean,
+    default: false,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

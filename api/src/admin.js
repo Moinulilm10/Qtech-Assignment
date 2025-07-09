@@ -3,7 +3,6 @@ import * as AdminJSMongoose from "@adminjs/mongoose";
 import AdminJS from "adminjs";
 import { Product } from "./models/Product.js";
 
-// Register the Mongoose adapter
 AdminJS.registerAdapter({
   Resource: AdminJSMongoose.Resource,
   Database: AdminJSMongoose.Database,
@@ -16,6 +15,15 @@ const adminJs = new AdminJS({
       options: {
         navigation: null,
         name: "Product",
+        id: "Product",
+      },
+    },
+    {
+      resource: Product,
+      options: {
+        navigation: null,
+        name: "Upcoming Product",
+        id: "Upcoming Product",
       },
     },
   ],
