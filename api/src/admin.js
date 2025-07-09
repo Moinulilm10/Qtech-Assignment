@@ -13,17 +13,17 @@ const adminJs = new AdminJS({
     {
       resource: Product,
       options: {
+        id: "Products",
         navigation: null,
-        name: "Product",
-        id: "Product",
+        label: "Products",
       },
     },
     {
       resource: Product,
       options: {
+        id: "UpcomingProducts",
         navigation: null,
-        name: "Upcoming Product",
-        id: "Upcoming Product",
+        label: "Upcoming Products",
       },
     },
   ],
