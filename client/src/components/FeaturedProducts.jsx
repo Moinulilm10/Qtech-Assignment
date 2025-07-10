@@ -69,6 +69,7 @@ const FeaturedProducts = () => {
         }
         /* Fix card size and layout */
         .product-card {
+          width:200px;
           height: 380px;
           display: flex;
           flex-direction: column;
