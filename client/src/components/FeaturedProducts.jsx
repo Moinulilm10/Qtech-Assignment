@@ -3,26 +3,30 @@ import { useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
+
+import { useCart } from "../Context/CartContext";
 import useFetch from "../hooks/useFetch";
 
 const FeaturedProducts = () => {
   const { data: products, loading, error } = useFetch("/products");
+  const { addToCart } = useCart();
   const [favourites, setFavourites] = useState(new Set());
 
   const toggleFavourite = (id) => {
     setFavourites((prev) => {
       const newFav = new Set(prev);
-      if (newFav.has(id)) {
-        newFav.delete(id);
-      } else {
-        newFav.add(id);
-      }
+      newFav.has(id) ? newFav.delete(id) : newFav.add(id);
       return newFav;
     });
   };
 
   const handleAddToCart = (product) => {
-    console.log(`Added ${product.title} to cart`);
+    addToCart({
+      id: product.id,
+      name: product.title,
+      price: product.price,
+      image: product.image,
+    });
   };
 
   const settings = {
@@ -36,14 +40,11 @@ const FeaturedProducts = () => {
     pauseOnHover: true,
     arrows: false,
     responsive: [
-      { breakpoint: 1536, settings: { slidesToShow: 5, slidesToScroll: 1 } },
-      { breakpoint: 1280, settings: { slidesToShow: 5, slidesToScroll: 1 } },
-      { breakpoint: 1024, settings: { slidesToShow: 4, slidesToScroll: 1 } },
-      { breakpoint: 768, settings: { slidesToShow: 3, slidesToScroll: 1 } },
-      {
-        breakpoint: 640,
-        settings: { slidesToShow: 1, slidesToScroll: 1, dots: true },
-      },
+      { breakpoint: 1536, settings: { slidesToShow: 5 } },
+      { breakpoint: 1280, settings: { slidesToShow: 5 } },
+      { breakpoint: 1024, settings: { slidesToShow: 4 } },
+      { breakpoint: 768, settings: { slidesToShow: 3 } },
+      { breakpoint: 640, settings: { slidesToShow: 1, dots: true } },
     ],
   };
 
@@ -63,13 +64,11 @@ const FeaturedProducts = () => {
         .slick-dots li.slick-active button:before {
           color: #994d51;
         }
-        /* Add gap between slider items */
         .slick-slide > div {
           margin: 10px 8px;
         }
-        /* Fix card size and layout */
         .product-card {
-          width:200px;
+          width: 200px;
           height: 380px;
           display: flex;
           flex-direction: column;
@@ -78,6 +77,7 @@ const FeaturedProducts = () => {
           box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
           background: white;
           padding: 1rem;
+          margin: auto;
         }
         .product-image {
           height: 200px;
@@ -88,26 +88,18 @@ const FeaturedProducts = () => {
           border-radius: 0.5rem;
           flex-shrink: 0;
         }
-        .content-wrapper {
-          display: flex;
-          flex-direction: column;
-          flex-grow: 1;
-          margin-top: 0.75rem;
-          overflow: hidden;
-        }
         .product-title {
           font-size: 1rem;
           font-weight: 500;
           color: #1b0e0e;
           margin-bottom: 0.5rem;
-          /* clamp to max 3 lines */
           display: -webkit-box;
           -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
           overflow: hidden;
           text-overflow: ellipsis;
           line-height: 1.2em;
-          max-height: 3.6em; /* 1.2 * 3 */
+          max-height: 3.6em;
         }
         .price-fav {
           display: flex;
@@ -125,7 +117,6 @@ const FeaturedProducts = () => {
           transition: color 0.3s;
           display: flex;
           align-items: center;
-          color: #994d51;
         }
         .favourite-icon:hover {
           color: #f87171;
@@ -140,7 +131,7 @@ const FeaturedProducts = () => {
           border: none;
           cursor: pointer;
           transition: all 0.2s ease;
-          margin-top: auto; /* push button to bottom */
+          margin-top: auto;
         }
         .add-to-cart-btn:hover {
           background-color: #f3e7e8;

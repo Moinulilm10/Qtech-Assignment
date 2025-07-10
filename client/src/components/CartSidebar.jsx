@@ -1,66 +1,12 @@
 import { Minus, Plus, Trash2, X } from "lucide-react";
 import { useState } from "react";
+
+import { useCart } from "../Context/CartContext";
 import CheckoutForm from "./CheckoutForm";
 
 const CartSidebar = ({ isOpen, onClose }) => {
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
-
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: "Classic Cotton T-Shirt",
-      size: "Size M",
-      quantity: 2,
-      price: 75.0,
-      image: "/api/placeholder/60/60",
-    },
-    {
-      id: 2,
-      name: "Slim Fit Jeans",
-      size: "Size 8",
-      quantity: 1,
-      price: 45.0,
-      image: "/api/placeholder/60/60",
-    },
-    {
-      id: 3,
-      name: "Leather Ankle Boots",
-      size: "Size 9",
-      quantity: 1,
-      price: 120.0,
-      image: "/api/placeholder/60/60",
-    },
-    {
-      id: 4,
-      name: "Woven Scarf",
-      size: "One Size",
-      quantity: 1,
-      price: 35.0,
-      image: "/api/placeholder/60/60",
-    },
-  ]);
-
-  const updateQuantity = (id, change) => {
-    setCartItems((prev) =>
-      prev
-        .map((item) =>
-          item.id === id
-            ? { ...item, quantity: Math.max(0, item.quantity + change) }
-            : item
-        )
-        .filter((item) => item.quantity > 0)
-    );
-  };
-
-  // ✅ Remove single item
-  const removeItem = (id) => {
-    setCartItems((prev) => prev.filter((item) => item.id !== id));
-  };
-
-  // ✅ Remove all items
-  const removeAllItems = () => {
-    setCartItems([]);
-  };
+  const { cartItems, updateQuantity, removeItem, removeAllItems } = useCart();
 
   const subtotal = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -72,7 +18,6 @@ const CartSidebar = ({ isOpen, onClose }) => {
 
   return (
     <>
-      {/* Overlay */}
       {isOpen && (
         <div
           className="fixed inset-0 z-40 transition-opacity bg-black bg-opacity-50"
@@ -80,14 +25,12 @@ const CartSidebar = ({ isOpen, onClose }) => {
         />
       )}
 
-      {/* Sidebar */}
       <div
         className={`fixed top-0 right-0 h-full w-full max-w-md bg-white z-50 transform transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "translate-x-full"
         } shadow-xl`}
       >
         <div className="flex flex-col h-full">
-          {/* Header */}
           <div className="flex items-center justify-between p-4 border-b border-gray-200 md:p-6">
             <h2 className="text-xl md:text-2xl font-bold text-[#1b0e0e]">
               Your Shopping Bag
@@ -100,12 +43,10 @@ const CartSidebar = ({ isOpen, onClose }) => {
             </button>
           </div>
 
-          {/* Cart Items */}
           <div className="flex-1 p-4 overflow-y-auto md:p-6">
             <div className="space-y-6">
               {cartItems.map((item) => (
                 <div key={item.id} className="relative flex items-center gap-4">
-                  {/* ❌ Remove Button */}
                   <button
                     onClick={() => removeItem(item.id)}
                     className="p-2 text-gray-400 transition-colors bg-gray-100 rounded-full hover:text-red-600 hover:bg-gray-200"
@@ -113,22 +54,20 @@ const CartSidebar = ({ isOpen, onClose }) => {
                     <X className="w-4 h-4" />
                   </button>
 
-                  {/* Product Image */}
                   <div className="flex items-center justify-center flex-shrink-0 w-16 h-16 bg-gray-100 rounded-lg md:w-20 md:h-20">
-                    <div className="w-10 h-10 bg-gray-300 rounded md:w-12 md:h-12"></div>
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="object-contain w-12 h-12 md:w-14 md:h-14"
+                    />
                   </div>
 
-                  {/* Product Details */}
                   <div className="flex-1 min-w-0">
                     <h3 className="font-medium text-[#1b0e0e] text-sm md:text-base leading-tight">
                       {item.name}
                     </h3>
-                    <p className="mt-1 text-xs text-gray-600 md:text-sm">
-                      {item.size}
-                    </p>
                   </div>
 
-                  {/* Quantity Controls */}
                   <div className="flex items-center gap-2 md:gap-3">
                     <button
                       onClick={() => updateQuantity(item.id, -1)}
@@ -151,7 +90,6 @@ const CartSidebar = ({ isOpen, onClose }) => {
                 </div>
               ))}
 
-              {/* 🗑️ Delete All Button */}
               {cartItems.length > 0 && (
                 <button
                   onClick={removeAllItems}
@@ -164,7 +102,6 @@ const CartSidebar = ({ isOpen, onClose }) => {
             </div>
           </div>
 
-          {/* Summary */}
           <div className="p-4 border-t border-gray-200 md:p-6">
             <div className="mb-6 space-y-3">
               <div className="flex justify-between text-sm md:text-base">
@@ -203,7 +140,6 @@ const CartSidebar = ({ isOpen, onClose }) => {
         </div>
       </div>
 
-      {/* Checkout Form */}
       <CheckoutForm
         isOpen={isCheckoutOpen}
         onClose={() => setIsCheckoutOpen(false)}

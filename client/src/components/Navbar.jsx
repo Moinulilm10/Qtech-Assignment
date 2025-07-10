@@ -1,10 +1,16 @@
 import { Menu, ShoppingCart, X } from "lucide-react";
 import { useState } from "react";
+import { useCart } from "../Context/CartContext";
 import CartSidebar from "./CartSidebar";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const { cartItems } = useCart();
+
+  // Total quantity of items
+  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   const handleCartClick = () => {
     setIsCartOpen(true);
@@ -81,11 +87,24 @@ const Navbar = () => {
             >
               Home
             </a>
-            <button
+            {/* <button
               onClick={handleCartClick}
               className="block text-[#1b0e0e] text-sm font-medium py-2 w-full text-left"
             >
               Cart
+            </button> */}
+            <button
+              onClick={onCartOpen}
+              className="relative p-2 rounded-full hover:bg-gray-100"
+              aria-label="Open cart"
+            >
+              <ShoppingCart className="w-6 h-6 text-[#1b0e0e]" />
+
+              {totalItems > 0 && (
+                <span className="absolute flex items-center justify-center w-5 h-5 text-xs font-semibold text-white bg-red-500 rounded-full -top-1 -right-1">
+                  {totalItems}
+                </span>
+              )}
             </button>
           </div>
         </div>
