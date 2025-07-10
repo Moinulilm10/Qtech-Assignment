@@ -1,16 +1,19 @@
-import { Menu, ShoppingCart, X } from "lucide-react";
+import { Heart, Menu, ShoppingCart, X } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../Context/CartContext";
+import { useFavorites } from "../Context/FavoriteContext";
 import CartSidebar from "./CartSidebar";
+import FavoriteSidebar from "./FavoriteSidebar";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isFavoriteOpen, setIsFavoriteOpen] = useState(false);
 
   const { cartItems } = useCart();
+  const { favorites } = useFavorites();
 
-  // Total quantity of items
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   const handleCartClick = () => {
@@ -18,9 +21,15 @@ const Navbar = () => {
     setIsMobileMenuOpen(false);
   };
 
+  const handleFavoriteClick = () => {
+    setIsFavoriteOpen(true);
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <>
       <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f3e7e8] px-4 md:px-10 py-3">
+        {/* Logo */}
         <div className="flex items-center gap-4 text-[#1b0e0e]">
           <div className="w-4 h-4">
             <svg
@@ -39,36 +48,62 @@ const Navbar = () => {
           </h2>
         </div>
 
-        {/* Desktop Navigation */}
-        <div className="justify-end flex-1 hidden gap-8 md:flex">
-          <div className="flex items-center gap-9">
-            <Link
-              to="/"
-              className="text-[#1b0e0e] text-sm font-medium leading-normal"
-            >
-              Home
-            </Link>
-          </div>
+        {/* Desktop Nav */}
+        <div className="items-center justify-end flex-1 hidden gap-8 md:flex">
+          <Link to="/" className="text-[#1b0e0e] text-sm font-medium">
+            Home
+          </Link>
+
+          {/* Favorite Icon */}
+          <button
+            onClick={handleFavoriteClick}
+            className="relative p-2 rounded-lg hover:bg-[#f3e7e8]"
+          >
+            <Heart className="w-5 h-5 text-[#1b0e0e]" />
+            {favorites.length > 0 && (
+              <span className="absolute flex items-center justify-center w-5 h-5 text-xs font-semibold text-white bg-red-500 rounded-full -top-1 -right-1">
+                {favorites.length}
+              </span>
+            )}
+          </button>
+
+          {/* Cart Button */}
           <button
             onClick={handleCartClick}
-            className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#f3e7e8] text-[#1b0e0e] text-sm font-bold leading-normal tracking-[0.015em] hover:bg-[#e8d5d6] transition-colors"
+            className="relative flex min-w-[84px] items-center justify-center h-10 px-4 bg-[#f3e7e8] text-[#1b0e0e] text-sm font-bold rounded-lg hover:bg-[#e8d5d6] transition-colors"
           >
             <span className="truncate">Cart</span>
             {totalItems > 0 && (
-              <span className="absolute flex items-center justify-center w-5 h-5 text-xs font-semibold text-white bg-red-500 rounded-full top-2 right-9">
+              <span className="absolute flex items-center justify-center w-5 h-5 text-xs font-semibold text-white bg-red-500 rounded-full -top-1 -right-1">
                 {totalItems}
               </span>
             )}
           </button>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Buttons */}
         <div className="flex items-center gap-4 md:hidden">
           <button
+            onClick={handleFavoriteClick}
+            className="relative p-2 rounded-lg hover:bg-[#f3e7e8]"
+          >
+            <Heart className="w-5 h-5 text-[#1b0e0e]" />
+            {favorites.length > 0 && (
+              <span className="absolute flex items-center justify-center w-5 h-5 text-xs font-semibold text-white bg-red-500 rounded-full -top-1 -right-1">
+                {favorites.length}
+              </span>
+            )}
+          </button>
+          <button
             onClick={handleCartClick}
-            className="flex items-center justify-center w-10 h-10 bg-[#f3e7e8] rounded-lg hover:bg-[#e8d5d6] transition-colors"
+            className="relative p-2 rounded-lg hover:bg-[#f3e7e8]"
           >
             <ShoppingCart className="w-5 h-5 text-[#1b0e0e]" />
+            {totalItems > 0 && (
+              <span className="absolute flex items-center justify-center w-5 h-5 text-xs font-semibold text-white bg-red-500 rounded-full -top-1 -right-1">
+                {totalItems}
+              </span>
+            )}
           </button>
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -93,31 +128,16 @@ const Navbar = () => {
             >
               Home
             </Link>
-            {/* <button
-              onClick={handleCartClick}
-              className="block text-[#1b0e0e] text-sm font-medium py-2 w-full text-left"
-            >
-              Cart
-            </button> */}
-            <button
-              onClick={onCartOpen}
-              className="relative p-2 rounded-full hover:bg-gray-100"
-              aria-label="Open cart"
-            >
-              <ShoppingCart className="w-6 h-6 text-[#1b0e0e]" />
-
-              {totalItems > 0 && (
-                <span className="absolute flex items-center justify-center w-5 h-5 text-xs font-semibold text-white bg-red-500 rounded-full -top-1 -right-1">
-                  {totalItems}
-                </span>
-              )}
-            </button>
           </div>
         </div>
       )}
 
-      {/* Cart Sidebar */}
+      {/* Sidebars */}
       <CartSidebar isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+      <FavoriteSidebar
+        isOpen={isFavoriteOpen}
+        onClose={() => setIsFavoriteOpen(false)}
+      />
     </>
   );
 };
