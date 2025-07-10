@@ -1,4 +1,3 @@
-import { Heart } from "lucide-react";
 import { useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
@@ -68,7 +67,7 @@ const NewArrivalProducts = () => {
         }
         .product-card {
           width:200px;
-          height: 380px;
+          height: 338px;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
@@ -157,31 +156,7 @@ const NewArrivalProducts = () => {
                 <p className="product-title">{product.title}</p>
                 <div className="price-fav">
                   <p className="price">${product.price}</p>
-                  <span
-                    className="favourite-icon"
-                    onClick={() => toggleFavourite(product.id)}
-                    role="button"
-                    aria-label={
-                      favourites.has(product.id)
-                        ? "Remove from favourites"
-                        : "Add to favourites"
-                    }
-                    style={{
-                      color: favourites.has(product.id) ? "#f87171" : "#994d51",
-                    }}
-                  >
-                    <Heart
-                      size={20}
-                      fill={favourites.has(product.id) ? "#f87171" : "none"}
-                    />
-                  </span>
                 </div>
-                <button
-                  onClick={() => handleAddToCart(product)}
-                  className="add-to-cart-btn"
-                >
-                  Add to Cart
-                </button>
               </div>
             </div>
           </div>
