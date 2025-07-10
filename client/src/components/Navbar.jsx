@@ -1,5 +1,6 @@
 import { Menu, ShoppingCart, X } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useCart } from "../Context/CartContext";
 import CartSidebar from "./CartSidebar";
 
@@ -41,18 +42,23 @@ const Navbar = () => {
         {/* Desktop Navigation */}
         <div className="justify-end flex-1 hidden gap-8 md:flex">
           <div className="flex items-center gap-9">
-            <a
+            <Link
+              to="/"
               className="text-[#1b0e0e] text-sm font-medium leading-normal"
-              href="#"
             >
               Home
-            </a>
+            </Link>
           </div>
           <button
             onClick={handleCartClick}
             className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#f3e7e8] text-[#1b0e0e] text-sm font-bold leading-normal tracking-[0.015em] hover:bg-[#e8d5d6] transition-colors"
           >
             <span className="truncate">Cart</span>
+            {totalItems > 0 && (
+              <span className="absolute flex items-center justify-center w-5 h-5 text-xs font-semibold text-white bg-red-500 rounded-full top-2 right-9">
+                {totalItems}
+              </span>
+            )}
           </button>
         </div>
 
@@ -81,12 +87,12 @@ const Navbar = () => {
       {isMobileMenuOpen && (
         <div className="md:hidden bg-white border-b border-[#f3e7e8]">
           <div className="px-4 py-3 space-y-2">
-            <a
-              href="#"
+            <Link
+              to="/"
               className="block text-[#1b0e0e] text-sm font-medium py-2"
             >
               Home
-            </a>
+            </Link>
             {/* <button
               onClick={handleCartClick}
               className="block text-[#1b0e0e] text-sm font-medium py-2 w-full text-left"
