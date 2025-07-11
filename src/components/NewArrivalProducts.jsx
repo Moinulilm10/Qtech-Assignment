@@ -2,7 +2,7 @@ import { useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-import useFetch from "../hooks/useFetch";
+import useFetch from "../Hooks/useFetch.js";
 
 const NewArrivalProducts = () => {
   const { data: products, loading, error } = useFetch("/products");
