@@ -14,7 +14,7 @@ This project is a fully functional e-commerce web application that allows users 
 
 ## 🚀 Live Demo
 
-[**View Live Application**](YOUR_LIVE_LINK_HERE)
+[**View Live Application**](https://qtech-assignment-zeta.vercel.app/)
 
 ## 📸 Project Screenshots
 
