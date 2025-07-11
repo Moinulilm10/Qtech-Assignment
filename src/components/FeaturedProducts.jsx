@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick.css";
 import Swal from "sweetalert2";
 import { useCart } from "../Context/CartContext";
 import { useFavorites } from "../Context/FavoriteContext";
-import useFetch from "../Hooks/useFetch";
+import useFetch from "../Hooks/useFetch.js";
 import ProductDetailsPopup from "./ProductDetailsPopup";
 
 const FeaturedProducts = () => {
