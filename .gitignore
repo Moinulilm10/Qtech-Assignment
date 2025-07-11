@@ -1,0 +1,44 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# production
+/dist
+/build
+
+# misc
+.DS_Store
+.env
+.env.local
+.env.*.local
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+
+# testing
+/coverage
+
+# editor settings
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# system files
+Thumbs.db
+Desktop.ini
+
+# lint cache
+.eslintcache
+
+# firebase
+.firebase/
+.firebaserc
+
+# build output from Vite
+*.local
