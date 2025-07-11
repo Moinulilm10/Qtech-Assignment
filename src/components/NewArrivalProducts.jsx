@@ -3,6 +3,51 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import useFetch from "../Hooks/useFetch.js";
+import ProductDetailsPopup from "./ProductDetailsPopup.jsx";
+
+const NextArrow = ({ onClick }) => (
+  <div
+    onClick={onClick}
+    className="absolute top-1/2 right-[-30px] z-10 transform -translate-y-1/2 cursor-pointer bg-white p-2 rounded-full shadow hover:bg-gray-100"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="w-5 h-5 text-gray-700"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M9 5l7 7-7 7"
+      />
+    </svg>
+  </div>
+);
+
+const PrevArrow = ({ onClick }) => (
+  <div
+    onClick={onClick}
+    className="absolute top-1/2 left-[-30px] z-10 transform -translate-y-1/2 cursor-pointer bg-white p-2 rounded-full shadow hover:bg-gray-100"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="w-5 h-5 text-gray-700"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M15 19l-7-7 7-7"
+      />
+    </svg>
+  </div>
+);
 
 const NewArrivalProducts = () => {
   const { data: products, loading, error } = useFetch("/products");
@@ -20,20 +65,31 @@ const NewArrivalProducts = () => {
     });
   };
 
-  const handleAddToCart = (product) => {
-    console.log(`Added ${product.title} to cart`);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const closePopup = () => {
+    setSelectedProduct(null);
+    setIsPopupOpen(false);
+  };
+
+  const openProductDetails = (product) => {
+    setSelectedProduct(product);
+    setIsPopupOpen(true);
   };
 
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 6,
+    slidesToShow: 5,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
     pauseOnHover: true,
-    arrows: false,
+    arrows: true,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
     responsive: [
       { breakpoint: 1536, settings: { slidesToShow: 5, slidesToScroll: 1 } },
       { breakpoint: 1280, settings: { slidesToShow: 4, slidesToScroll: 1 } },
@@ -41,7 +97,7 @@ const NewArrivalProducts = () => {
       { breakpoint: 768, settings: { slidesToShow: 2, slidesToScroll: 1 } },
       {
         breakpoint: 640,
-        settings: { slidesToShow: 1, slidesToScroll: 1, dots: true },
+        settings: { slidesToShow: 1, slidesToScroll: 1, dots: false },
       },
     ],
   };
@@ -50,7 +106,7 @@ const NewArrivalProducts = () => {
   if (error) return <p>Error loading products: {error}</p>;
 
   return (
-    <div className="px-4">
+    <div className="relative px-4">
       <style>{`
         .slick-dots {
           bottom: -50px;
@@ -144,10 +200,17 @@ const NewArrivalProducts = () => {
         }
       `}</style>
 
+      {isPopupOpen && (
+        <ProductDetailsPopup product={selectedProduct} onClose={closePopup} />
+      )}
+
       <Slider {...settings}>
         {products.map((product) => (
           <div key={product.id}>
-            <div className="product-card w-[200px] mx-auto">
+            <div
+              onClick={() => openProductDetails(product)}
+              className="product-card w-[200px] mx-auto"
+            >
               <div
                 className="product-image"
                 style={{ backgroundImage: `url(${product.image})` }}

@@ -13,7 +13,7 @@ const HomePage = () => {
       <div className="flex flex-col h-full grow">
         <Navbar />
         <div className="flex justify-center flex-1 px-4 py-5 mb-32 sm:px-8 md:px-16 lg:px-40">
-          <div className="flex flex-col max-w-[1379px] flex-1">
+          <div className="flex flex-col w-full max-w-[1379px] mx-auto px-2 sm:px-4 md:px-6 lg:px-8 xl:px-10">
             {/* Hero Section */}
             <HeroBanner />
             {/* Featured Products */}

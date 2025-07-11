@@ -61,7 +61,7 @@ const Navbar = () => {
           >
             <div className="flex items-center justify-between gap-3 bg-[#f3e7e8] hover:bg-[#e8d5d6] transition-colors px-4 rounded-lg py-2">
               <Heart className="w-5 h-5 text-[#1b0e0e]" />
-              <span className="text-sm font-bold">Favorite List</span>
+              <span className="text-sm font-bold">Favorite</span>
               {favorites.length > 0 && (
                 <span className="absolute flex items-center justify-center w-5 h-5 text-xs font-semibold text-white bg-red-500 rounded-full -top-1 -right-1">
                   {favorites.length}
@@ -92,7 +92,7 @@ const Navbar = () => {
           >
             <div className="flex items-center justify-between gap-3 bg-[#f3e7e8] hover:bg-[#e8d5d6] transition-colors px-4 rounded-lg py-2">
               <Heart className="w-5 h-5 text-[#1b0e0e]" />
-              <span className="text-sm font-bold">Favorite List</span>
+              <span className="text-sm font-bold">Favorite</span>
               {favorites.length > 0 && (
                 <span className="absolute flex items-center justify-center w-5 h-5 text-xs font-semibold text-white bg-red-500 rounded-full -top-1 -right-1">
                   {favorites.length}
