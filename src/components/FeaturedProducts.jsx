@@ -3,11 +3,10 @@ import { useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-
 import Swal from "sweetalert2";
 import { useCart } from "../Context/CartContext";
 import { useFavorites } from "../Context/FavoriteContext";
-import useFetch from "../hooks/useFetch";
+import useFetch from "../Hooks/useFetch";
 import ProductDetailsPopup from "./ProductDetailsPopup";
 
 const FeaturedProducts = () => {
